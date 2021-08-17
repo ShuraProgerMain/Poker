@@ -1,15 +1,18 @@
-using UnityEditor;
+using Enums;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewCard")]
-public class TemplateCard : ScriptableObject
+namespace CardTemplate
 {
-    public Sprite cardImage;
-    public CardType type;
-    public CardSubtype subType;
-
-    public void Initialize()
+    [CreateAssetMenu(fileName = "NewCard")]
+    public class TemplateCard : ScriptableObject
     {
-        cardImage = Resources.Load<Sprite>($"CardsBlack/{name}" + "_black");
+        public Sprite cardImage;
+        public CardType type;
+        public CardSubtype subType;
+
+        public void Initialize()
+        {
+            cardImage = Resources.Load<Sprite>($"CardsBlack/{name}" + "_black");
+        }
     }
 }

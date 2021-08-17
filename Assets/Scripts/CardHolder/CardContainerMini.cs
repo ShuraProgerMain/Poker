@@ -1,40 +1,40 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+using MiniGame;
 using UnityEngine;
 
-public class CardContainerMini : CardContainerRoot
+namespace CardHolder
 {
-    private MiniGameCardHolder _miniGameCardHolder;
-
-    public override void AwakeCustom()
+    public class CardContainerMini : CardContainerRoot
     {
-        _miniGameCardHolder = transform.parent.GetComponent<MiniGameCardHolder>();
-    }
+        private MiniGameCardHolder _miniGameCardHolder;
+
+        public override void AwakeCustom()
+        {
+            _miniGameCardHolder = transform.parent.GetComponent<MiniGameCardHolder>();
+        }
     
-    private void OnMouseDown()
-    {
-        if (!inactive)
+        private void OnMouseDown()
         {
-            CheckCards();
-            ShowCardImage();
+            if (!inactive)
+            {
+                CheckCards();
+                ShowCardImage();
+            }
         }
-    }
 
-    private void CheckCards()
-    {
-        var temp = _miniGameCardHolder.CardComparsion((int)currentCard.type);
+        private void CheckCards()
+        {
+            var temp = _miniGameCardHolder.CardComparsion((int)currentCard.type);
 
-        if (temp)
-        {
-            Debug.Log("молодец");
-        }
-        else
-        {
-            Debug.Log(" NE молодец");
-        }
+            if (temp)
+            {
+                Debug.Log("молодец");
+            }
+            else
+            {
+                Debug.Log(" NE молодец");
+            }
         
-        _miniGameCardHolder.ShowAllCardImage();
+            _miniGameCardHolder.ShowAllCardImage();
+        }
     }
 }

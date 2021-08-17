@@ -1,59 +1,62 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using CardHolder;
+using CardTemplate;
 using UnityEngine;
 
-public class MiniGameCardHolder : MonoBehaviour
+namespace MiniGame
 {
-    [SerializeField] private CardContainerRoot[] _cardContainers; 
-    
-    private const int _cardCount = 5;
-
-    private TemplateCard[] _activeCards = new TemplateCard[5];
-
-    #region Events
-
-    public static Action<int> MiniGameResult;
-
-    #endregion
-    
-    public void DistributeCards(TemplateCard[] cards)
+    public class MiniGameCardHolder : MonoBehaviour
     {
-        _cardContainers[0].AddCard(cards[0]);
-        _cardContainers[0].ShowCardImage();
-        
-        for (int i = 1; i < _cardCount; i++)
+        [SerializeField] private CardContainerRoot[] _cardContainers; 
+    
+        private const int _cardCount = 5;
+
+        private TemplateCard[] _activeCards = new TemplateCard[5];
+
+        #region Events
+
+        public static Action<int> MiniGameResult;
+
+        #endregion
+    
+        public void DistributeCards(TemplateCard[] cards)
         {
-            if (!_cardContainers[i].inactive)
+            _cardContainers[0].AddCard(cards[0]);
+            _cardContainers[0].ShowCardImage();
+        
+            for (int i = 1; i < _cardCount; i++)
             {
-                _cardContainers[i].DeleteCard();
-                _cardContainers[i].AddCard(cards[i]);
-                _activeCards[i] = _cardContainers[i].currentCard;
+                if (!_cardContainers[i].inactive)
+                {
+                    _cardContainers[i].DeleteCard();
+                    _cardContainers[i].AddCard(cards[i]);
+                    _activeCards[i] = _cardContainers[i].currentCard;
+                }
             }
         }
-    }
 
-    public bool CardComparsion(int rank)
-    {
-        var temp = (int) _cardContainers[0].currentCard.type < rank;
+        public bool CardComparsion(int rank)
+        {
+            var temp = (int) _cardContainers[0].currentCard.type < rank;
 
-        if (temp)
-        {
-            MiniGameResult?.Invoke(2);
-        }
-        else
-        {
-            MiniGameResult?.Invoke(0);
-        }
+            if (temp)
+            {
+                MiniGameResult?.Invoke(2);
+            }
+            else
+            {
+                MiniGameResult?.Invoke(0);
+            }
         
-        return temp;
-    }
+            return temp;
+        }
 
-    public void ShowAllCardImage()
-    {
-        for (int i = 1; i < _cardCount; i++)
+        public void ShowAllCardImage()
         {
-            _cardContainers[i].ShowCardImage();
+            for (int i = 1; i < _cardCount; i++)
+            {
+                _cardContainers[i].ShowCardImage();
+            }
         }
     }
 }

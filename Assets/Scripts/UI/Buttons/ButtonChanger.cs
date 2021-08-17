@@ -1,34 +1,35 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using User;
 
-public class ButtonChanger : MonoBehaviour
+namespace UI.Buttons
 {
-    [SerializeField] private Button[] _buttons;
-
-    #region Events
-
-    private void OnEnable()
+    public class ButtonChanger : MonoBehaviour
     {
-        MainCardHolder.WinningCombination += i =>
-        {
-            ShowNextButton(2);
-        };
-    }
+        [SerializeField] private Button[] _buttons;
 
-    #endregion
-    
-    public void ShowNextButton(int index)
-    {
-        foreach (var item in _buttons)
+        #region Events
+
+        private void OnEnable()
         {
-            item.gameObject.SetActive(false);
+            MainCardHolder.WinningCombination += i =>
+            {
+                ShowNextButton(2);
+            };
         }
+
+        #endregion
+    
+        public void ShowNextButton(int index)
+        {
+            foreach (var item in _buttons)
+            {
+                item.gameObject.SetActive(false);
+            }
         
-        _buttons[index].gameObject.SetActive(true);
+            _buttons[index].gameObject.SetActive(true);
         
         
+        }
     }
 }

@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CreditsView : MonoBehaviour
+namespace UI.CreditsView
 {
-    [SerializeField] private Text _creditsCount;
-    [SerializeField] private Text _creditsCountMiniGame;
-
-    public void SetCreditsText(float credits)
+    public class CreditsView : MonoBehaviour
     {
-        _creditsCount.text = credits.ToString();
-    }
+        [SerializeField] private Text _creditsCount;
+        [SerializeField] private Text _creditsCountMiniGame;
 
-    public void SetMiniGameCredits(float credits)
-    {
-        _creditsCountMiniGame.text = credits.ToString();
+        public void SetCreditsText(float credits)
+        {
+            _creditsCount.text = credits.ToString();
+        }
+
+        public void SetMiniGameCredits(float credits)
+        {
+            _creditsCountMiniGame.text = credits.ToString();
+        }
     }
 }

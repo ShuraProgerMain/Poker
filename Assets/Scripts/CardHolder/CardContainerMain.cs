@@ -1,41 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-
-public class CardContainerMain : CardContainerRoot
+namespace CardHolder
 {
-    private void OnMouseDown()
+    public class CardContainerMain : CardContainerRoot
     {
-        if (currentCard != null)
+        private void OnMouseDown()
         {
-            HoldOnCard();
+            if (currentCard != null)
+            {
+                HoldOnCard();
+            }
         }
-    }
     
-    public void HoldOnCard()
-    {
-        inactive = !inactive;
-        SetState();
-    }
+        public void HoldOnCard()
+        {
+            inactive = !inactive;
+            SetState();
+        }
     
-    public void HoldOnCardReset()
-    {
-        inactive = false;
-        SetState();
-    }
-    public void SetState()
-    {
-        if (inactive)
+        public void HoldOnCardReset()
         {
-            _renderer.color = _inactiveColor;
+            inactive = false;
+            SetState();
         }
-        else
+        public void SetState()
         {
-            _renderer.color = _defaultColor;
+            if (inactive)
+            {
+                _renderer.color = _inactiveColor;
+            }
+            else
+            {
+                _renderer.color = _defaultColor;
+            }
         }
-    }
 
     
+    }
 }

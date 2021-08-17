@@ -1,40 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
+using UI.Buttons;
 using UnityEngine;
 
-public class MiniGameMove : MonoBehaviour
+namespace MiniGame
 {
-    [SerializeField] private Transform mainCardHolder;
-    private readonly float _offset = 5.5f;
-    private Transform _mainTransform;
-
-    #region Enable/Disable
-
-    private void OnEnable()
+    public class MiniGameMove : MonoBehaviour
     {
-        ButtonHandler.MiniGameShowAction += () => ShowMiniGame();
-        ButtonHandler.MiniGameHideAction += () => HideMiniGame();
-    }
+        [SerializeField] private Transform mainCardHolder;
+        private readonly float _offset = 5.5f;
+        private Transform _mainTransform;
 
-    #endregion
+        #region Enable/Disable
 
-    private void Awake()
-    {
-        _mainTransform = GetComponent<Transform>();
-    }
+        private void OnEnable()
+        {
+            ButtonHandler.MiniGameShowAction += () => ShowMiniGame();
+            ButtonHandler.MiniGameHideAction += () => HideMiniGame();
+        }
 
-    private void HideMiniGame()
-    {
-        _mainTransform.DOMove(Vector3.right * _offset, 0.25f);
-        mainCardHolder.DOMove(Vector3.zero, 0.25f);
-    }
+        #endregion
 
-    private void ShowMiniGame()
-    {
-        _mainTransform.DOMove(Vector3.zero, 0.25f);
-        mainCardHolder.DOMove(Vector3.right * _offset, 0.25f);
+        private void Awake()
+        {
+            _mainTransform = GetComponent<Transform>();
+        }
 
+        private void HideMiniGame()
+        {
+            _mainTransform.DOMove(Vector3.right * _offset, 0.25f);
+            mainCardHolder.DOMove(Vector3.zero, 0.25f);
+        }
+
+        private void ShowMiniGame()
+        {
+            _mainTransform.DOMove(Vector3.zero, 0.25f);
+            mainCardHolder.DOMove(Vector3.right * _offset, 0.25f);
+
+        }
     }
 }

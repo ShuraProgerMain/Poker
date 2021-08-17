@@ -1,16 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DataPanel : MonoBehaviour
+namespace UI.PanelControl
 {
-    public bool horizontalOffset;
-    public float offset;
-    public RectTransform currentTransform;
-
-    private void Awake()
+    public class DataPanel : MonoBehaviour
     {
-        currentTransform = GetComponent<RectTransform>();
+        public bool horizontalOffset;
+        public float offset;
+        public RectTransform currentTransform;
+
+        private void Awake()
+        {
+            currentTransform = GetComponent<RectTransform>();
+        }
     }
 }

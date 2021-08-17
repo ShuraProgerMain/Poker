@@ -1,121 +1,123 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using CardTemplate;
+using MiniGame;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using User;
 using Random = UnityEngine.Random;
 
-public class DealerMain : MonoBehaviour
+namespace DealerComponents
 {
-    [SerializeField] private MainCardHolder _mainCardHolder;
-    [SerializeField] private MiniGameCardHolder _miniCardHolder;
-    
-    [SerializeField] private TemplateCard[] _allCards;
-
-    private List<int> randoms = new List<int>();
-    
-    private void Awake()
+    public class DealerMain : MonoBehaviour
     {
-        _allCards = Resources.LoadAll<TemplateCard>("Cards");
+        [SerializeField] private MainCardHolder _mainCardHolder;
+        [SerializeField] private MiniGameCardHolder _miniCardHolder;
+    
+        [SerializeField] private TemplateCard[] _allCards;
 
-        foreach (var item in _allCards)
+        private List<int> randoms = new List<int>();
+    
+        private void Awake()
         {
-            item.Initialize();
-        }
-    }
+            _allCards = Resources.LoadAll<TemplateCard>("Cards");
 
-    private List<int> RandomCardDraft()
-    {
-        var temp = new List<int>();
-        
-        for (int i = 0; i < 5; i++)
-        {
-            var num = Random.Range(0, _allCards.Length);
-
-            if (!randoms.Contains(num))
+            foreach (var item in _allCards)
             {
-                temp.Add(num);
-            }
-            else
-            {
-                i--;
+                item.Initialize();
             }
         }
 
-        return temp;
-    }
-
-    public void DealMiniGameCard()
-    {
-        var temp = RandomCardDraft();
-
-        var randomCards = GetRandomCards(temp);
-        
-        _miniCardHolder.DistributeCards(randomCards.ToArray());
-    }
-    
-    public void DrawCard()
-    {
-        var temp = RandomCardDraft();
-
-        var randomCards = GetRandomCards(temp);
-        
-        _mainCardHolder.DistributeCards(randomCards.ToArray());
-    }
-
-    private List<TemplateCard> GetRandomCards(List<int> tempRandom) 
-    {
-        var randomCards = new List<TemplateCard>();
-
-        foreach (var item in tempRandom)
+        private List<int> RandomCardDraft()
         {
-            randomCards.Add(_allCards[item]);   
+            var temp = new List<int>();
+        
+            for (int i = 0; i < 5; i++)
+            {
+                var num = Random.Range(0, _allCards.Length);
+
+                if (!randoms.Contains(num))
+                {
+                    temp.Add(num);
+                }
+                else
+                {
+                    i--;
+                }
+            }
+
+            return temp;
         }
 
-        return randomCards;
-    }
+        public void DealMiniGameCard()
+        {
+            var temp = RandomCardDraft();
+
+            var randomCards = GetRandomCards(temp);
+        
+            _miniCardHolder.DistributeCards(randomCards.ToArray());
+        }
     
-    public void DealCards()
-    {
-        randoms.Clear();
+        public void DrawCard()
+        {
+            var temp = RandomCardDraft();
+
+            var randomCards = GetRandomCards(temp);
         
-        _mainCardHolder.ClearCards();
+            _mainCardHolder.DistributeCards(randomCards.ToArray());
+        }
+
+        private List<TemplateCard> GetRandomCards(List<int> tempRandom) 
+        {
+            var randomCards = new List<TemplateCard>();
+
+            foreach (var item in tempRandom)
+            {
+                randomCards.Add(_allCards[item]);   
+            }
+
+            return randomCards;
+        }
+    
+        public void DealCards()
+        {
+            randoms.Clear();
         
-        randoms = RandomCardDraft();
-
-        var randomCards = GetRandomCards(randoms);
-
-        _mainCardHolder.DistributeCards(randomCards.ToArray());
-
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     var num = Random.Range(0, _allCards.Length);
-        //
-        //     if (!randoms.Contains(num))
-        //     {
-        //         randoms.Add(num);
-        //     }
-        //     else
-        //     {
-        //         i--;
-        //     }
-        // }
-
-
-        // foreach (var item in randoms)
-        // {
-        //     randomCards.Add(_allCards[item]);   
-        // }
+            _mainCardHolder.ClearCards();
         
-        //TODO удалить
-        // randomCards.Add(_allCards[10]);   
-        // randomCards.Add(_allCards[0]);   
-        // randomCards.Add(_allCards[36]);   
-        // randomCards.Add(_allCards[4]);   
-        // randomCards.Add(_allCards[17]);   
+            randoms = RandomCardDraft();
+
+            var randomCards = GetRandomCards(randoms);
+
+            _mainCardHolder.DistributeCards(randomCards.ToArray());
+
+            // for (int i = 0; i < 5; i++)
+            // {
+            //     var num = Random.Range(0, _allCards.Length);
+            //
+            //     if (!randoms.Contains(num))
+            //     {
+            //         randoms.Add(num);
+            //     }
+            //     else
+            //     {
+            //         i--;
+            //     }
+            // }
+
+
+            // foreach (var item in randoms)
+            // {
+            //     randomCards.Add(_allCards[item]);   
+            // }
+        
+            //TODO удалить
+            // randomCards.Add(_allCards[10]);   
+            // randomCards.Add(_allCards[0]);   
+            // randomCards.Add(_allCards[36]);   
+            // randomCards.Add(_allCards[4]);   
+            // randomCards.Add(_allCards[17]);   
         
 
 
+        }
     }
 }
